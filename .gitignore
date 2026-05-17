@@ -1,0 +1,27 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+.env
+
+# Nix
+.direnv/
+result
+
+# Typst output
+*.pdf
+
+# Data (large/sensitive files)
+janet/paper/data/raw/
+janet/paper/data/processed/
+janet/paper/figures/*.png
+
+# Editor
+.helix/
