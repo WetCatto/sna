@@ -23,5 +23,9 @@ janet/paper/data/raw/
 janet/paper/data/processed/
 janet/paper/figures/*.png
 
+# Simulation app artifacts
+simulation/__pycache__/
+simulation/.venv/
+
 # Editor
 .helix/
