@@ -57,17 +57,15 @@ The World Health Organization formally declared a global "infodemic" alongside
 the COVID-19 pandemic in February 2020 @WHO2020, characterizing the concurrent
 epidemic of health misinformation as a threat as serious as the virus itself.
 On social media platforms --- particularly Twitter --- COVID-19 vaccine
-misinformation propagated at a velocity that far outpaced institutional
-correction efforts @Cinelli2020, with false health content spreading up to six
-times faster than accurate information on Twitter @Vosoughi2018. In the Philippines, where the national
+misinformation spread far faster than health institutions could respond
+@Cinelli2020 @Vosoughi2018. In the Philippines, where the national
 immunization campaign confronted a population already sensitized to vaccine
 anxiety by the 2017 Dengvaxia controversy, social media became a critical
 battleground for public health communication @Roozenbeek2020.
 
-Despite extensive research documenting the _content_ of COVID-19 vaccine
-misinformation --- false claims about mRNA mechanisms, side effects, and
-microchip conspiracies @Loomba2021 --- the structural _topology_ of the
-networks through which these claims propagate remains comparatively
+Much existing research documents *what* vaccine misinformation claims --- mRNA
+myths, side-effect scares, conspiracy theories @Loomba2021 --- but the
+structural *topology* of how these claims travel remains comparatively
 underexplored. Understanding which accounts function as superspreaders, which
 communities concentrate coordinated inauthentic behavior, and which structural
 brokers bridge isolated stance communities has direct implications for platform
@@ -95,13 +93,9 @@ spreaders, health authorities, news media, and vaccine-hesitant communities?
 centrality relative to their PageRank --- that bridge otherwise isolated vaccine
 stance communities and represent potential infodemic intervention targets?
 
-The University of Southeastern Philippines (USeP), situated in Davao City --- a
-region where COVID-19 vaccine misinformation circulated widely through community
-social networks during the 2021 immunization rollout --- has a direct
-institutional interest in understanding how online health misinformation shapes
-public behavior and undermines immunization coverage. This study contributes to
-USeP's research agenda on information integrity, public health communication,
-and community resilience in Southern Philippines.
+Davao City --- USeP's home region --- saw substantial vaccine misinformation
+activity during the 2021 rollout, making structural analysis of these networks
+a direct institutional research priority.
 
 // ===========================================================================
 #colbreak()
@@ -155,18 +149,13 @@ DOI at #link("https://doi.org/10.3390/epidemiologia2030024")[doi:10.3390/epidemi
 synthesized network ensures full reproducibility and structural fidelity to
 empirically documented properties of COVID-19 vaccine infodemic networks.
 
-The network was generated using NetworkX 3.6 @Hagberg2008 with the following
-construction protocol: (1) a preferential attachment mechanism @Barabasi1999
-governed intra-community edge formation, producing scale-free degree
-distributions consistent with COVID-19 Twitter retweet networks @Cinelli2020;
-(2) five initial communities were seeded corresponding to vaccine stance
-factions documented in Philippine health misinformation research @Loomba2021
-@Roozenbeek2020; (3) bot-suspected accounts --- comprising 20% of total nodes,
-consistent with Ferrara's @Ferrara2020 estimate of 15--25% inauthentic activity
-in COVID-19 vaccine discourse --- were assigned additional outgoing edges to
-simulate unidirectional amplification behavior; and (4) cross-community edges
-were added proportionally to represent documented interaction patterns between
-health authority accounts, mainstream media, and vaccine-hesitant communities.
+Using NetworkX 3.6 @Hagberg2008, intra-community edges followed preferential
+attachment @Barabasi1999, producing scale-free degree distributions matching
+COVID-19 retweet data @Cinelli2020. Five communities seeded the vaccine stance
+factions documented in Philippine infodemic research @Loomba2021 @Roozenbeek2020.
+Bot accounts (20% of nodes, within Ferrara's @Ferrara2020 estimated 15--25%
+range) received extra outgoing edges to simulate amplification, with
+cross-community edges proportional to documented interaction patterns.
 
 #figure(
   kind: table,
@@ -314,9 +303,9 @@ The Health Authorities community achieves the highest average PageRank
 that authoritative health accounts --- encompassing official health agency
 profiles, hospital communications, and public health figures --- are
 structurally positioned to reach broad audiences through high-quality
-amplification pathways @Loomba2021. This finding directly addresses RQ1:
-legitimate health authorities, not misinformation spreaders, dominate the
-organic influence layer of the Philippine vaccine discourse network.
+amplification pathways @Loomba2021. Health authorities, not misinformation spreaders, dominate the organic
+influence layer --- exactly what an effective public health information
+ecosystem should look like.
 
 === In-Degree and Out-Degree Analysis
 
@@ -475,14 +464,12 @@ community coloring.
   )
 ) <tbl-communities>
 
-The results address RQ3 by revealing a community structure that maps onto the
-documented vaccine stance landscape of the Philippine COVID-19 information
-environment. Critically, while the initial community boundaries were seeded in
-the generative model, the Louvain algorithm independently recovered structurally
-coherent partitions with modularity $Q = 0.4837$ --- confirming that the
-inter-community edge density patterns are consistent with organic community
-formation, and that the vaccine stance-based seeding reflects structural
-properties documented in COVID-19 infodemic research @Cinelli2020 @Ferrara2020.
+The recovered community structure maps directly onto the vaccine stance
+landscape documented in COVID-19 infodemic research @Cinelli2020 @Ferrara2020.
+Although the initial communities were seeded, Louvain independently confirmed
+structurally coherent partitions ($Q = 0.4837$), validating that the generative
+model's inter-community edge patterns are consistent with organic community
+formation.
 
 Community 1 (Vaccine Misinformation Accounts, $n = 962$) is the largest by
 node count but exhibits lower average PageRank (0.000398) than Community 2
@@ -546,41 +533,31 @@ This study applied a six-metric social network analysis framework to a directed
 retweet network calibrated to the structural parameters of Philippine COVID-19
 vaccine discourse on Twitter, revealing three principal findings.
 
-First, credible vaccine information hubs (highest PageRank) are exclusively
-organic accounts concentrated in the Health Authorities community, which
-maintains higher average influence (avg. PR = 0.000783) than the numerically
-larger Vaccine Misinformation Accounts community (avg. PR = 0.000398). This
-addresses RQ1: legitimate health authority accounts are structurally dominant
-in organic influence pathways, while misinformation spreaders compensate through
-volumetric amplification. The finding suggests that amplifying authoritative
-health voices --- rather than suppressing individual misinformation accounts ---
-may be the more structurally efficient public health intervention @Loomba2021 @Pennycook2021.
+Health Authorities hold the highest PageRank (avg. PR = 0.000783) despite being
+outnumbered by Vaccine Misinformation accounts (avg. PR = 0.000398) --- credible
+voices command structurally superior reach even when outnumbered, while
+misinformation spreaders compensate through volume. For RQ1, this confirms that
+amplifying authoritative health voices may be a more effective intervention than
+suppressing individual accounts @Loomba2021 @Pennycook2021.
 
-Second, betweenness centrality identifies a broker class --- including
-bot-suspected Acc. 190 (betweenness = 0.034293), the network's primary
-structural bridge --- largely invisible to PageRank-based influence rankings
-(RQ2, RQ4). Acc. 190 is positioned at the structural intersection of the
-Vaccine Misinformation Accounts and Vaccine-Hesitant Community, potentially
-functioning as a conversion gateway through which organic hesitancy is
-radicalized into active misinformation sharing. This hidden broker role
-represents a critical infodemic intervention point that single-metric
-influence analyses would systematically miss.
+Bot-suspected Acc. 190 (betweenness = 0.034293) is the network's primary
+structural bridge yet ranks low on PageRank --- sitting at the intersection of
+the Vaccine Misinformation Accounts and Vaccine-Hesitant Community, it may act
+as a conversion gateway radicalizing hesitant users. These hidden brokers
+(RQ2/RQ4) are invisible to single-metric rankings, making betweenness an
+essential complement to PageRank for infodemic intervention.
 
-Third, the Bot Amplification Network's 81.1% bot concentration and near-zero
-reciprocity (avg. = 0.0008) provide structural evidence of a dedicated CIB
-infrastructure operating at the periphery of the organic vaccine discourse
-network (RQ3), consistent with the coordinated inauthentic amplification
-profiles documented in COVID-19 bot research @Ferrara2020 @Stella2018.
+The Bot Amplification Network's 81.1% bot concentration and near-zero
+reciprocity (avg. = 0.0008) mark it as a dedicated CIB layer at the network's
+periphery (RQ3) --- consistent with coordinated inauthentic amplification
+patterns documented in COVID-19 bot research @Ferrara2020 @Stella2018.
 
-Limitations of this study include the use of a synthetic network and the
-heuristic nature of the bot classification. Future work should apply this
-framework to longitudinal real-world datasets when platform access permits, to
-trace how the bot amplification community evolves across vaccination campaign
-phases, and should incorporate temporal SNA methods to identify the sequence
-of anti-vaccine narrative injections across distinct infodemic waves.
+Key limitations are the synthetic network and heuristic bot labels. Future work
+should apply this framework to longitudinal real data to track how the bot
+community evolves across campaign phases and pinpoint the sequence of
+anti-vaccine narrative injections across infodemic waves.
 
 // ===========================================================================
-#colbreak()
 = References
 // ===========================================================================
 
