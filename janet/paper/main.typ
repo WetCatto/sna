@@ -13,6 +13,11 @@
       affiliation: "College of Information and Computing, University of Southeastern Philippines",
       email:       "jogaas00904@usep.edu.ph",
     ),
+    (
+      name:        "Hezekiah John Reij S. Mercado",
+      affiliation: "College of Information and Computing, University of Southeastern Philippines",
+      email:       "hjrsmercado00112@usep.edu.ph",
+    ),
   ),
   abstract: [
     The COVID-19 pandemic generated a parallel "infodemic" --- a global surge
@@ -53,7 +58,8 @@ the COVID-19 pandemic in February 2020 @WHO2020, characterizing the concurrent
 epidemic of health misinformation as a threat as serious as the virus itself.
 On social media platforms --- particularly Twitter --- COVID-19 vaccine
 misinformation propagated at a velocity that far outpaced institutional
-correction efforts @Cinelli2020. In the Philippines, where the national
+correction efforts @Cinelli2020, with false health content spreading up to six
+times faster than accurate information on Twitter @Vosoughi2018. In the Philippines, where the national
 immunization campaign confronted a population already sensitized to vaccine
 anxiety by the 2017 Dengvaxia controversy, social media became a critical
 battleground for public health communication @Roozenbeek2020.
@@ -144,6 +150,8 @@ chosen: the original Twitter API data-sharing model has been discontinued,
 redistribution of hashed user identifiers is prohibited under current platform
 terms of service, and the raw COVID-19 Twitter datasets that remain accessible
 @Banda2021 require hydration pipelines that are no longer viable at scale. The
+dataset documentation and tweet-ID files are publicly accessible via the paper's
+DOI at #link("https://doi.org/10.3390/epidemiologia2030024")[doi:10.3390/epidemiologia2030024]. The
 synthesized network ensures full reproducibility and structural fidelity to
 empirically documented properties of COVID-19 vaccine infodemic networks.
 
@@ -198,7 +206,7 @@ connectivity, and structural behavior (Table II).
   kind: table,
   caption: [SNA Metrics Applied --- Definition, NetworkX Implementation, and Research Purpose],
   table(
-    columns: (auto, 1.2fr, 1.5fr),
+    columns: (1fr, 1.4fr, 1.4fr),
     stroke: 0.5pt,
     inset: 5pt,
     align: (left, left, left),
@@ -206,19 +214,19 @@ connectivity, and structural behavior (Table II).
       [*Metric*], [*Implementation*], [*Research Purpose*],
     ),
     [In-Degree Centrality],
-      [`in_degree_centrality(G)`],
+      [`in_degree_`\ `centrality(G)`],
       [Identifies vaccine information superspreaders --- accounts most widely retweeted],
     [Out-Degree Centrality],
-      [`out_degree_centrality(G)`],
+      [`out_degree_`\ `centrality(G)`],
       [Identifies amplifiers --- accounts retweeting anti-vaccine content at high volume],
     [PageRank],
-      [`pagerank(G, alpha=0.85)`],
+      [`pagerank(G,`\ `alpha=0.85)`],
       [Measures influence accounting for the quality of retweeters @Brin1998],
     [Betweenness Centrality],
-      [`betweenness_centrality(G, k=500)`],
+      [`betweenness_`\ `centrality(`\ `G, k=500)`],
       [Detects structural brokers bridging vaccine stance communities @Brandes2001 @Freeman1977],
     [Clustering Coefficient],
-      [`clustering(G.to_undirected())`],
+      [`clustering(`\ `G.to_undirected())`],
       [Measures local cohesion; low values indicate bot-like mechanical behavior],
     [Per-node Reciprocity],
       [Manual (mutual edge fraction)],
@@ -232,12 +240,13 @@ with substantially reduced computational cost on large networks.
 
 == Community Detection
 
-*Louvain algorithm* @Blondel2008 was applied to the undirected projection of
-the full network as the primary community detection method, optimizing for
-modularity $Q = sum_c [L_c \/ m - (d_c \/ (2m))^2]$ where $L_c$ is the number
-of edges within community $c$, $m$ the total edges, and $d_c$ the sum of
-degrees in $c$. The Louvain method is computationally efficient for large
-networks and has been validated on COVID-19 infodemic datasets @Cinelli2020.
+*Louvain algorithm* @Blondel2008 @Newman2006 was applied to the undirected
+projection of the full network as the primary community detection method,
+optimizing for modularity $Q = sum_c [L_c \/ m - (d_c \/ (2m))^2]$ where
+$L_c$ is the number of edges within community $c$, $m$ the total edges, and
+$d_c$ the sum of degrees in $c$. The Louvain method is computationally
+efficient for large networks and has been validated on COVID-19 infodemic
+datasets @Cinelli2020.
 
 *Girvan-Newman algorithm* @GirvanNewman2002 was applied to a 150-node
 high-degree core subgraph for hierarchical community analysis, iteratively
@@ -443,7 +452,7 @@ organic user behavior.
 
 The Louvain algorithm partitioned the network into five communities with
 modularity $Q = 0.4837$, well above the standard threshold of 0.3 for
-meaningful community structure @Blondel2008. Table VI summarizes the
+meaningful community structure @Blondel2008 @Newman2006. Table VI summarizes the
 community-level statistics, and Fig. 5 presents the full network layout with
 community coloring.
 
@@ -545,7 +554,7 @@ addresses RQ1: legitimate health authority accounts are structurally dominant
 in organic influence pathways, while misinformation spreaders compensate through
 volumetric amplification. The finding suggests that amplifying authoritative
 health voices --- rather than suppressing individual misinformation accounts ---
-may be the more structurally efficient public health intervention @Loomba2021.
+may be the more structurally efficient public health intervention @Loomba2021 @Pennycook2021.
 
 Second, betweenness centrality identifies a broker class --- including
 bot-suspected Acc. 190 (betweenness = 0.034293), the network's primary
