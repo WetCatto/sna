@@ -238,9 +238,8 @@ with st.sidebar:
         '<p style="font-size:0.72rem;color:#8890a4;line-height:1.6;">'
         'Twitter Information Operations<br>'
         'Philippines Release — August 2019<br><br>'
-        '<a href="https://transparency.x.com/en/reports/information-operations.html" '
-        'target="_blank" style="color:#4f8ef7;text-decoration:none;">'
-        'transparency.x.com ↗</a>'
+        '<span style="font-size:0.65rem;color:#555c70;">'
+        'Original source (transparency.x.com)<br>is no longer publicly accessible.</span>'
         '</p>',
         unsafe_allow_html=True,
     )
