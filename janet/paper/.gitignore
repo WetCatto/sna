@@ -1,0 +1,6 @@
+data/raw/
+data/processed/
+figures/*.png
+__pycache__/
+*.pyc
+output.pdf

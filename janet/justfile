@@ -1,0 +1,3 @@
+# List all commands (default)
+default:
+    @just --list
