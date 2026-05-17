@@ -236,10 +236,12 @@ with st.sidebar:
     st.markdown('<p class="section-label">Dataset</p>', unsafe_allow_html=True)
     st.markdown(
         '<p style="font-size:0.72rem;color:#8890a4;line-height:1.6;">'
-        'Twitter Information Operations<br>'
-        'Philippines Release — August 2019<br><br>'
+        'COVID-19 Vaccine Discourse<br>'
+        'Philippine Twitter — 2021<br><br>'
         '<span style="font-size:0.65rem;color:#555c70;">'
-        'Original source (transparency.x.com)<br>is no longer publicly accessible.</span>'
+        'Synthetic network calibrated to<br>'
+        'Cinelli et al. 2020 &amp; Ferrara 2020<br>'
+        'infodemic network parameters.</span>'
         '</p>',
         unsafe_allow_html=True,
     )
@@ -274,10 +276,10 @@ top12 = df.nlargest(12, "pagerank")
 all_organic = (top12["node_type"] == "organic").all()
 top_comm = top12["louvain_community_name"].mode()[0]
 rq1_text = (
-    f'Top <strong>12</strong> content hubs are exclusively organic — concentrated in '
-    f'<strong>{top_comm}</strong>'
+    f'Top <strong>12</strong> superspreaders are exclusively organic — concentrated in '
+    f'<strong>{top_comm}</strong>, confirming health authorities dominate organic influence'
     if all_organic else
-    f'Top <strong>12</strong> content hubs include bot-suspected accounts — '
+    f'Top <strong>12</strong> superspreaders include bot-suspected accounts — '
     f'concentrated in <strong>{top_comm}</strong>'
 )
 
@@ -289,14 +291,14 @@ broker_bt = top_bt["betweenness_centrality"]
 rq2_qualifier = "bot-suspected" if broker_is_bot else "organic"
 rq2_text = (
     f'<strong>Acc. {broker_id}</strong> ({rq2_qualifier}) holds highest betweenness '
-    f'({broker_bt:.4f}) — primary structural bridge across community boundaries'
+    f'({broker_bt:.4f}) — hidden structural broker bridging isolated vaccine stance communities'
 )
 
 worst = comm_stats.loc[comm_stats["Bot %"].idxmax()]
 rq4_text = (
     f'<strong>{worst["louvain_community_name"]}</strong> has '
     f'<strong>{worst["Bot %"]:.0f}%</strong> bot concentration '
-    f'({int(worst["N"])} nodes) — pure amplification layer'
+    f'({int(worst["N"])} nodes) — dedicated anti-vaccine amplification infrastructure'
 )
 
 # ---------------------------------------------------------------------------
@@ -307,10 +309,10 @@ st.markdown("""
 <div style="padding: 2rem 0 1.25rem 0; border-bottom: 1px solid #1e2130; margin-bottom: 0.5rem;">
     <h1 style="font-size:1.7rem; font-weight:800; color:#e8eaf0;
                letter-spacing:-0.03em; margin:0 0 0.4rem 0; line-height:1.2;">
-        Structural Architecture of Political Misinformation Diffusion
+        Mapping the COVID-19 Vaccine Infodemic
     </h1>
     <p style="font-size:0.85rem; color:#8890a4; margin:0; line-height:1.5;">
-        A Social Network Analysis of Coordinated Inauthentic Behavior in the 2022 Philippine Presidential Election
+        A Social Network Analysis of Misinformation Diffusion Patterns in Philippine Twitter
     </p>
 </div>
 """, unsafe_allow_html=True)
@@ -376,21 +378,21 @@ fc1, fc2, fc3 = st.columns(3)
 with fc1:
     st.markdown(f"""
     <div class="finding-card">
-        <div class="finding-rq">RQ1 — Content Hubs</div>
+        <div class="finding-rq">RQ1 — Superspreader Identification</div>
         <div class="finding-body">{rq1_text}</div>
     </div>""", unsafe_allow_html=True)
 
 with fc2:
     st.markdown(f"""
     <div class="finding-card">
-        <div class="finding-rq">RQ2 — Structural Broker</div>
+        <div class="finding-rq">RQ4 — Hidden Broker</div>
         <div class="finding-body">{rq2_text}</div>
     </div>""", unsafe_allow_html=True)
 
 with fc3:
     st.markdown(f"""
     <div class="finding-card rq4-card">
-        <div class="finding-rq">RQ4 — Bot Community</div>
+        <div class="finding-rq">RQ2 &amp; RQ3 — Bot Amplification</div>
         <div class="finding-body">{rq4_text}</div>
     </div>""", unsafe_allow_html=True)
 

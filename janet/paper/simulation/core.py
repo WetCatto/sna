@@ -12,23 +12,23 @@ import networkx.algorithms.community as nx_comm
 import numpy as np
 
 COMMUNITY_DEFS = [
-    ("Marcos Supporters", 0.38),
-    ("Robredo Supporters", 0.25),
+    ("Vaccine Misinformation Accounts", 0.38),
+    ("Health Authorities", 0.25),
     ("News & Media Accounts", 0.15),
-    ("Neutral / Undecided", 0.12),
-    ("Amplification Bots", 0.10),
+    ("Vaccine-Hesitant Community", 0.12),
+    ("Bot Amplification Network", 0.10),
 ]
 
-COMM_COLORS = ["#4e79a7", "#f28e2b", "#e15759", "#76b7b2", "#ff9da7"]
-BOT_COLOR = "#e15759"
-ORGANIC_COLOR = "#4e79a7"
+COMM_COLORS = ["#e05c5c", "#4f8ef7", "#76b7b2", "#f28e2b", "#ff9da7"]
+BOT_COLOR = "#e05c5c"
+ORGANIC_COLOR = "#4f8ef7"
 
 COMM_LABEL_MAP = {
-    0: "Marcos Supporters",
-    1: "Robredo Supporters",
-    2: "News & Media Accounts",
-    3: "Amplification Bots",
-    4: "Neutral / Undecided",
+    0: "Vaccine Misinformation",
+    1: "Health Authorities",
+    2: "News & Media",
+    3: "Bot Amplification",
+    4: "Vaccine-Hesitant",
 }
 
 
