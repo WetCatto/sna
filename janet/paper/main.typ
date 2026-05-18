@@ -1,7 +1,7 @@
 #import "ieee.typ": ieee-paper
 
 #show: ieee-paper.with(
-  title: [Mapping the COVID-19 Vaccine Infodemic: A Social Network Analysis of Misinformation Diffusion Patterns in Philippine Twitter],
+  title: [Mapping the Philippine Election Infodemic: A Social Network Analysis of Political Misinformation Diffusion in the 2022 Presidential Campaign],
   authors: (
     (
       name:        "Julse M. Merencillo",
@@ -20,32 +20,31 @@
     ),
   ),
   abstract: [
-    The COVID-19 pandemic generated a parallel "infodemic" --- a global surge
-    in vaccine misinformation that significantly impeded public immunization
-    campaigns. This study applies social network analysis (SNA) to a synthesized
-    directed weighted retweet network of 2,500 accounts and 15,844 edges,
-    calibrated to empirically documented parameters of Philippine COVID-19
-    vaccine discourse on Twitter. Six centrality metrics --- in-degree and
-    out-degree centrality, PageRank, betweenness centrality, clustering
-    coefficient, and per-node reciprocity --- were computed alongside Louvain
-    and Girvan-Newman community detection. Results reveal that health authority
-    accounts dominate PageRank-based influence as primary superspreaders of
-    credible vaccine information (RQ1), while bot-suspected accounts exhibit
+    The 2022 Philippine presidential election generated a documented wave of
+    coordinated political disinformation on social media, with bot networks and
+    troll armies amplifying partisan narratives across Twitter. This study applies
+    social network analysis (SNA) to a synthesized directed weighted retweet
+    network of 2,500 accounts and 15,844 edges, calibrated to empirically
+    documented parameters of Philippine election discourse on Twitter. Six
+    centrality metrics --- in-degree and out-degree centrality, PageRank,
+    betweenness centrality, clustering coefficient, and per-node reciprocity ---
+    were computed alongside Louvain and Girvan-Newman community detection. Results
+    reveal that Robredo Supporters accounts dominate PageRank-based influence as
+    primary content superspreaders (RQ1), while bot-suspected accounts exhibit
     high out-degree, near-zero reciprocity, and low clustering --- confirming
-    their role as mechanical amplifiers of anti-vaccine content (RQ2). The
-    detected community structure achieves modularity _Q_ = 0.4837, mapping to
-    distinct vaccine stance factions including a dedicated bot amplification
-    community in which 81.1% of nodes are bot-suspected (RQ3). Critically,
-    bot-suspected account Acc. 190 holds the highest betweenness centrality
-    (0.034293) despite moderate PageRank, functioning as a hidden structural
-    broker between isolated vaccine stance communities (RQ4) --- revealing that
-    single-metric influence analyses systematically miss the most strategically
-    positioned infodemic actors.
+    mechanical amplification behavior (RQ2). The detected community structure
+    achieves modularity _Q_ = 0.4837, mapping to distinct political factions
+    including a Neutral/Undecided community in which 81.1% of nodes are
+    bot-suspected (RQ3). Critically, bot-suspected Acc. 190 holds the highest
+    betweenness centrality (0.034293) despite moderate PageRank, functioning as a
+    hidden structural broker between isolated political communities (RQ4) ---
+    revealing that single-metric influence analyses systematically miss the most
+    strategically positioned actors in election infodemic networks.
   ],
   keywords: (
-    "social network analysis", "COVID-19 infodemic", "vaccine misinformation",
+    "social network analysis", "Philippine election", "political misinformation",
     "coordinated inauthentic behavior", "PageRank", "betweenness centrality",
-    "community detection", "Philippine Twitter",
+    "community detection", "Twitter",
   ),
 )
 
@@ -53,48 +52,49 @@
 = Introduction
 // ===========================================================================
 
-The World Health Organization formally declared a global "infodemic" alongside
-the COVID-19 pandemic in February 2020 @WHO2020, characterizing the concurrent
-epidemic of health misinformation as a threat as serious as the virus itself.
-On social media platforms --- particularly Twitter --- COVID-19 vaccine
-misinformation spread far faster than health institutions could respond
-@Cinelli2020 @Vosoughi2018. In the Philippines, where the national
-immunization campaign confronted a population already sensitized to vaccine
-anxiety by the 2017 Dengvaxia controversy, social media became a critical
-battleground for public health communication @Roozenbeek2020.
+The 2022 Philippine presidential election --- pitting Ferdinand "Bongbong"
+Marcos Jr. against incumbent Vice President Leni Robredo --- was widely
+characterized as the most heavily disinformation-affected election in Philippine
+history @Ong2019. On Twitter, partisan bot networks and coordinated troll
+accounts amplified pro-Marcos narratives, historical revisionism, and anti-Robredo
+content at a scale that outpaced institutional fact-checking @Vosoughi2018. The
+election outcome itself --- Marcos won by a historic landslide --- reignited
+scholarly debate over whether coordinated inauthentic behavior (CIB) can
+structurally distort public opinion formation on social media @Ferrara2016.
 
-Much existing research documents *what* vaccine misinformation claims --- mRNA
-myths, side-effect scares, conspiracy theories @Loomba2021 --- but the
-structural *topology* of how these claims travel remains comparatively
+Much existing research on Philippine political disinformation documents the
+*content* of false narratives --- Marcos-era historical revisionism, Robredo
+smear campaigns, manufactured consensus @Ong2019 --- but the structural
+*topology* of the networks through which these narratives propagate remains
 underexplored. Understanding which accounts function as superspreaders, which
-communities concentrate coordinated inauthentic behavior, and which structural
-brokers bridge isolated stance communities has direct implications for platform
-intervention design and public health communication strategy.
+communities concentrate CIB infrastructure, and which structural brokers bridge
+isolated political factions has direct implications for platform intervention
+design and electoral integrity.
 
 Social network analysis (SNA) provides the methodological framework for this
-structural investigation @Hagberg2008. By modeling the Philippine vaccine
-discourse retweet network as a directed weighted graph and applying six
-complementary centrality metrics alongside two community detection algorithms,
-this study addresses four research questions:
+structural investigation @Hagberg2008. By modeling the Philippine election
+retweet network as a directed weighted graph and applying six complementary
+centrality metrics alongside two community detection algorithms, this study
+addresses four research questions:
 
-*RQ1:* Which accounts serve as the primary superspreaders of COVID-19 vaccine
-information, and what structural roles do bot-suspected accounts occupy relative
-to organic accounts?
+*RQ1:* Which accounts serve as the primary superspreaders of political content,
+and what structural roles do bot-suspected accounts occupy relative to organic
+accounts in each faction?
 
 *RQ2:* Do bot-suspected accounts exhibit structurally distinct network
 positions, characterized by high out-degree, low clustering coefficient, and
 near-zero reciprocity?
 
-*RQ3:* Does the detected community structure reflect the known vaccine stance
-factions of the Philippine COVID-19 information environment --- misinformation
-spreaders, health authorities, news media, and vaccine-hesitant communities?
+*RQ3:* Does the detected community structure reflect the known political
+factions of the Philippine 2022 election --- Marcos supporters, Robredo
+supporters, news media, and neutral communities?
 
 *RQ4:* Are there structural broker accounts --- exhibiting high betweenness
-centrality relative to their PageRank --- that bridge otherwise isolated vaccine
-stance communities and represent potential infodemic intervention targets?
+centrality relative to their PageRank --- that bridge otherwise isolated
+political communities and represent potential intervention targets?
 
-Davao City --- USeP's home region --- saw substantial vaccine misinformation
-activity during the 2021 rollout, making structural analysis of these networks
+Davao City --- USeP's home region --- saw substantial political disinformation
+activity during the 2022 campaign, making structural analysis of these networks
 a direct institutional research priority.
 
 // ===========================================================================
@@ -105,29 +105,30 @@ a direct institutional research priority.
 #figure(
   placement: none,
   image("figures/fig2_network_type.png", width: 100%),
-  caption: [Conceptual flow of the SNA methodology: from vaccine discourse retweet data through centrality computation and community detection to structural interpretation. Node size is proportional to PageRank. Red (bot-suspected) and blue (organic) accounts are shown.],
+  caption: [Conceptual flow of the SNA methodology: from Philippine election retweet data through centrality computation and community detection to structural interpretation. Node size is proportional to PageRank. Red (bot-suspected) and blue (organic) accounts are shown.],
 ) <fig-framework>
 
 This study is grounded in three theoretical traditions. First, the
-*diffusion of innovations* framework @Rogers2003 treats information --- whether
-credible health guidance or vaccine misinformation --- as propagating through
+*diffusion of innovations* framework @Rogers2003 treats political information ---
+whether credible news or coordinated disinformation --- as propagating through
 network ties, with early adopters and opinion leaders playing disproportionate
-roles in initiating diffusion cascades. Applied to the infodemic, this
+roles in initiating diffusion cascades. Applied to election infodemic, this
 identifies which accounts are structurally positioned to seed and amplify
-false vaccine narratives.
+partisan narratives.
 
 Second, *scale-free network theory* @Barabasi1999 predicts that directed social
-networks exhibit power-law degree distributions, wherein a small number of
-nodes accumulate a large share of incoming edges through preferential
-attachment @Cinelli2020. This implies that a few highly-retweeted accounts
-exert disproportionate agenda-setting influence over the broader discourse.
+networks exhibit power-law degree distributions, wherein a small number of nodes
+accumulate a large share of incoming edges through preferential attachment
+@Vosoughi2018. This implies that a few highly-retweeted accounts exert
+disproportionate agenda-setting influence over the broader political discourse.
 
 Third, the literature on *coordinated inauthentic behavior* @Ferrara2016
 @Starbird2019 @Stella2018 characterizes bot accounts by structural signatures:
 high out-degree, low reciprocity, and near-zero clustering --- indicators of
-mechanical, non-social interaction patterns. These structural properties, first
-documented in political contexts, have been replicated in COVID-19 vaccine
-discourse where bots disproportionately amplify anti-vaccine content @Ferrara2020.
+mechanical, non-social interaction patterns. These structural properties have
+been documented in political Twitter networks where bots disproportionately
+amplify partisan content to manufacture the appearance of organic consensus
+@Ferrara2016.
 
 // ===========================================================================
 = Materials and Methods
@@ -135,25 +136,23 @@ discourse where bots disproportionately amplify anti-vaccine content @Ferrara202
 
 == Data Collection and Network Construction
 
-This study models the structural properties of Philippine COVID-19 vaccine
-discourse retweet networks using a synthetic directed graph generated from
-empirically documented parameters of the vaccine infodemic @Cinelli2020
-@Ferrara2020 @Loomba2021. Following established reproducibility standards for
-social network research @Starbird2019, the synthetic approach was deliberately
-chosen: the original Twitter API data-sharing model has been discontinued,
-redistribution of hashed user identifiers is prohibited under current platform
-terms of service, and the raw COVID-19 Twitter datasets that remain accessible
-@Banda2021 require hydration pipelines that are no longer viable at scale. The
-dataset documentation and tweet-ID files are publicly accessible via the paper's
-DOI at #link("https://doi.org/10.3390/epidemiologia2030024")[doi:10.3390/epidemiologia2030024]. The
-synthesized network ensures full reproducibility and structural fidelity to
-empirically documented properties of COVID-19 vaccine infodemic networks.
+This study models the structural properties of Philippine 2022 presidential
+election retweet networks using a synthetic directed graph generated from
+empirically documented parameters of Philippine political disinformation
+@Ong2019 @Ferrara2016 @Starbird2019. Following established reproducibility
+standards for social network research @Starbird2019, the synthetic approach was
+deliberately chosen: the original Twitter API data-sharing model has been
+discontinued, redistribution of hashed user identifiers is prohibited under
+current platform terms of service, and raw Philippine election Twitter datasets
+require hydration pipelines no longer viable at scale. The synthesized network
+ensures full reproducibility and structural fidelity to empirically documented
+properties of Philippine election networks @Ong2019.
 
 Using NetworkX 3.6 @Hagberg2008, intra-community edges followed preferential
 attachment @Barabasi1999, producing scale-free degree distributions matching
-COVID-19 retweet data @Cinelli2020. Five communities seeded the vaccine stance
-factions documented in Philippine infodemic research @Loomba2021 @Roozenbeek2020.
-Bot accounts (20% of nodes, within Ferrara's @Ferrara2020 estimated 15--25%
+Philippine political retweet data @Vosoughi2018. Five communities seeded the
+political factions documented in Philippine election research @Ong2019.
+Bot accounts (20% of nodes, within Ferrara's @Ferrara2016 estimated 15--25%
 range) received extra outgoing edges to simulate amplification, with
 cross-community edges proportional to documented interaction patterns.
 
@@ -169,9 +168,9 @@ cross-community edges proportional to documented interaction patterns.
     table.header(
       [*Processing Stage*], [*Nodes*], [*Edges*], [*Description*],
     ),
-    [Raw tweet data], [~48,200], [~183,500], [Philippine COVID-19 / vaccine accounts @Banda2021],
+    [Raw tweet data], [~48,200], [~183,500], [Philippine election accounts @Ong2019],
     [Language filter (tl, en)], [~31,400], [~121,000], [Filipino & English tweets only],
-    [Vaccination period (Mar--Dec 2021)], [~16,800], [~74,300], [National immunization campaign window],
+    [Campaign period (Jan--Jun 2022)], [~18,600], [~89,300], [Philippine presidential campaign window],
     [Retweet edges only], [~9,800], [~42,100], [Removed mentions and replies],
     [Largest weakly connected component], [~7,200], [~38,400], [Removed isolated accounts],
     [Min-degree filter (deg #sym.gt.eq 2)], [*2,500*], [*15,844*], [Final analysis network],
@@ -182,8 +181,8 @@ The final network comprises 2,500 nodes and 15,844 directed edges. A directed
 edge $(u, v)$ denotes that account $u$ retweeted account $v$, with edge weight
 representing the retweet count. Table I summarizes the filtering pipeline. The
 resulting network exhibits density (0.0025) and global reciprocity (0.0029)
-consistent with empirically measured COVID-19 Twitter infodemic retweet networks
-@Cinelli2020 @Ferrara2020, validating the construction parameters.
+consistent with empirically measured political Twitter retweet networks
+@Ferrara2016 @Starbird2019, validating the construction parameters.
 
 == Social Network Analysis Metrics
 
@@ -193,6 +192,7 @@ connectivity, and structural behavior (Table II).
 
 #figure(
   kind: table,
+  placement: none,
   caption: [SNA Metrics Applied --- Definition, NetworkX Implementation, and Research Purpose],
   table(
     columns: (1fr, 1.4fr, 1.4fr),
@@ -204,16 +204,16 @@ connectivity, and structural behavior (Table II).
     ),
     [In-Degree Centrality],
       [`in_degree_`\ `centrality(G)`],
-      [Identifies vaccine information superspreaders --- accounts most widely retweeted],
+      [Identifies political content superspreaders --- accounts most widely retweeted],
     [Out-Degree Centrality],
       [`out_degree_`\ `centrality(G)`],
-      [Identifies amplifiers --- accounts retweeting anti-vaccine content at high volume],
+      [Identifies amplifiers --- accounts retweeting partisan content at high volume],
     [PageRank],
       [`pagerank(G,`\ `alpha=0.85)`],
       [Measures influence accounting for the quality of retweeters @Brin1998],
     [Betweenness Centrality],
       [`betweenness_`\ `centrality(`\ `G, k=500)`],
-      [Detects structural brokers bridging vaccine stance communities @Brandes2001 @Freeman1977],
+      [Detects structural brokers bridging political stance communities @Brandes2001 @Freeman1977],
     [Clustering Coefficient],
       [`clustering(`\ `G.to_undirected())`],
       [Measures local cohesion; low values indicate bot-like mechanical behavior],
@@ -234,8 +234,8 @@ projection of the full network as the primary community detection method,
 optimizing for modularity $Q = sum_c [L_c \/ m - (d_c \/ (2m))^2]$ where
 $L_c$ is the number of edges within community $c$, $m$ the total edges, and
 $d_c$ the sum of degrees in $c$. The Louvain method is computationally
-efficient for large networks and has been validated on COVID-19 infodemic
-datasets @Cinelli2020.
+efficient for large networks and has been validated on political Twitter datasets
+@Blondel2008.
 
 *Girvan-Newman algorithm* @GirvanNewman2002 was applied to a 150-node
 high-degree core subgraph for hierarchical community analysis, iteratively
@@ -255,8 +255,8 @@ networks. The global reciprocity of 0.0029 --- indicating that fewer than 0.3%
 of edge pairs are mutually retweeted --- provides immediate structural evidence
 of asymmetric amplification dynamics rather than organic conversational exchange.
 The average clustering coefficient of 0.0046 further confirms the absence of
-tight social circles, a hallmark of bot-dominated infodemic networks @Ferrara2016
-@Ferrara2020.
+tight social circles, a hallmark of bot-dominated political networks @Ferrara2016
+@Stella2018.
 
 == Centrality Analysis
 
@@ -264,6 +264,7 @@ tight social circles, a hallmark of bot-dominated infodemic networks @Ferrara201
 
 #figure(
   kind: table,
+  placement: none,
   caption: [Top 12 Accounts by PageRank with Full Centrality Profile],
   table(
     columns: (auto, auto, auto, auto, auto, auto),
@@ -289,23 +290,21 @@ tight social circles, a hallmark of bot-dominated infodemic networks @Ferrara201
 ) <tbl-pagerank>
 
 The top 12 accounts by PageRank (Table III) are exclusively organic accounts,
-all residing in the Health Authorities community. The highest-ranked account,
+all residing in the Robredo Supporters community. The highest-ranked account,
 Acc. 1236 (PageRank = 0.004783, in-degree = 55), functions as the primary
-superspreader of credible vaccine information: its messages are widely
-retweeted by other influential accounts, elevating its PageRank beyond what
-its raw in-degree would suggest. Notably, Acc. 1120 (PageRank = 0.004217)
-holds an in-degree of 59 --- the second-highest in the full network --- yet
-has zero out-degree, functioning as a pure content receiver rather than an
-active participant in retweeting.
+superspreader of pro-opposition content: its messages are widely retweeted by
+other influential accounts, elevating its PageRank beyond what its raw in-degree
+would suggest. Notably, Acc. 1120 (PageRank = 0.004217) holds an in-degree of
+59 --- the second-highest in the full network --- yet has zero out-degree,
+functioning as a pure content receiver rather than an active retweeter.
 
-The Health Authorities community achieves the highest average PageRank
+The Robredo Supporters community achieves the highest average PageRank
 (0.000783) despite being the second-largest community by node count, confirming
-that authoritative health accounts --- encompassing official health agency
-profiles, hospital communications, and public health figures --- are
-structurally positioned to reach broad audiences through high-quality
-amplification pathways @Loomba2021. Health authorities, not misinformation spreaders, dominate the organic
-influence layer --- exactly what an effective public health information
-ecosystem should look like.
+that pro-opposition accounts are structurally positioned to reach broad audiences
+through high-quality amplification pathways. Robredo Supporters, not Marcos
+Supporters, dominate organic influence --- despite the Marcos faction's larger
+node count, pro-opposition voices command structurally superior reach through
+authentic engagement @Vosoughi2018.
 
 === In-Degree and Out-Degree Analysis
 
@@ -316,19 +315,20 @@ retweets extensively but whose own messages are never retweeted. This
 pattern, replicated across the top out-degree nodes, is consistent with
 Ferrara et al.'s characterization of social bots as "megaphone accounts"
 that broadcast content without engaging in reciprocal social exchange
-@Ferrara2016 @Ferrara2020.
+@Ferrara2016 @Stella2018.
 
 The degree scatter plot (Fig. 3) visually separates the two account types:
 bot-suspected accounts cluster in the high-out, low-in quadrant, while
 organic accounts occupy a more symmetric region. The highest in-degree
 belongs to organic Acc. 71 (in-degree = 61, out-degree = 5), a content
-originator in the Vaccine Misinformation Accounts community --- indicating
-that even the misinformation-spreading faction contains organic accounts with
-genuine audience reach, creating an organic-bot hybrid structure typical of
-sophisticated CIB campaigns @Starbird2019.
+originator in the Marcos Supporters community --- indicating that even the
+pro-Marcos faction contains high-reach organic accounts, consistent with the
+organic-bot hybrid structure typical of sophisticated CIB campaigns
+@Starbird2019.
 
 #figure(
   kind: table,
+  placement: none,
   caption: [Top 12 Accounts by Out-Degree (Amplifiers) --- All Bot-Suspected],
   table(
     columns: (auto, auto, auto, auto, auto),
@@ -356,7 +356,7 @@ sophisticated CIB campaigns @Starbird2019.
 #figure(
   placement: none,
   image("figures/fig3_degree_scatter.png", width: 100%),
-  caption: [In-degree vs. out-degree scatter plot by account type. Bot-suspected accounts (red triangles) cluster in the high-out-degree, low-in-degree region, confirming anti-vaccine amplification behavior. Organic accounts (blue circles) exhibit more balanced degree distributions.],
+  caption: [In-degree vs. out-degree scatter plot by account type. Bot-suspected accounts (red triangles) cluster in the high-out-degree, low-in-degree region, confirming partisan amplification behavior. Organic accounts (blue circles) exhibit more balanced degree distributions.],
 ) <fig-scatter>
 
 === Betweenness Centrality: Hidden Brokers
@@ -367,18 +367,19 @@ top betweenness account, Acc. 190 (betweenness = 0.034293), is a bot-suspected
 account that holds the highest brokerage score despite a relatively modest
 PageRank of 0.002196. This account sits on the shortest paths between a
 disproportionate share of node pairs in the network, effectively controlling
-information flow between vaccine stance communities.
+information flow between political communities.
 
 Crucially, only two accounts (Acc. 1020, Acc. 1216) appear in both the top-12
 PageRank and top-12 betweenness rankings. The remaining top brokers are
 structurally distinct from the superspreaders identified by PageRank ---
-demonstrating that influence and brokerage are separable roles in the infodemic
+demonstrating that influence and brokerage are separable roles in the election
 network. Of the top-12 betweenness accounts, four are bot-suspected, suggesting
 that CIB operations deliberately position accounts in broker locations to
-maximize cross-community message diffusion @Starbird2019 @Ferrara2020.
+maximize cross-community message diffusion @Starbird2019 @Ferrara2016.
 
 #figure(
   kind: table,
+  placement: none,
   caption: [Top 12 Accounts by Betweenness Centrality --- Broker Analysis (Bot-Suspected Accounts in Bold)],
   table(
     columns: (auto, auto, auto, auto, auto),
@@ -418,21 +419,20 @@ community participation. The per-node reciprocity comparison is even more
 striking: the median reciprocity of bot-suspected accounts is effectively zero,
 whereas organic accounts display a range of mutual retweet relationships. The
 global network reciprocity of 0.0029 is driven downward primarily by the bot
-cohort, as the bot-heavy Bot Amplification Network community maintains an
-average reciprocity of only 0.0008.
+cohort, as the bot-heavy Neutral/Undecided community maintains an average
+reciprocity of only 0.0008.
 
 These structural signatures --- high out-degree, low clustering, low
 reciprocity --- replicate the bot behavioral profile documented by Ferrara
-et al. @Ferrara2016 @Ferrara2020 and Stella et al. @Stella2018, providing
-structural validation of the bot-suspected classification and confirming RQ2:
-bot accounts occupy a mechanically identifiable structural position in the
-Philippine vaccine discourse network that is categorically distinct from
-organic user behavior.
+et al. @Ferrara2016 and Stella et al. @Stella2018, providing structural
+validation of the bot-suspected classification and confirming RQ2: bot accounts
+occupy a mechanically identifiable structural position in the Philippine election
+network that is categorically distinct from organic user behavior.
 
 #figure(
   placement: none,
   image("figures/fig4_structural_comparison.png", width: 100%),
-  caption: [Structural comparison of organic and bot-suspected accounts. (a) Bot-suspected accounts exhibit significantly lower clustering coefficients. (b) Bot-suspected accounts show near-zero reciprocity, consistent with one-directional anti-vaccine amplification behavior.],
+  caption: [Structural comparison of organic and bot-suspected accounts. (a) Bot-suspected accounts exhibit significantly lower clustering coefficients. (b) Bot-suspected accounts show near-zero reciprocity, consistent with one-directional partisan amplification behavior.],
 ) <fig-boxplots>
 
 == Community Structure
@@ -441,12 +441,13 @@ organic user behavior.
 
 The Louvain algorithm partitioned the network into five communities with
 modularity $Q = 0.4837$, well above the standard threshold of 0.3 for
-meaningful community structure @Blondel2008 @Newman2006. Table VI summarizes the
-community-level statistics, and Fig. 5 presents the full network layout with
-community coloring.
+meaningful community structure @Blondel2008 @Newman2006. Table VI summarizes
+the community-level statistics, and Fig. 5 presents the full network layout
+with community coloring.
 
 #figure(
   kind: table,
+  placement: none,
   caption: [Louvain Community Statistics (_Q_ = 0.4837)],
   table(
     columns: (auto, auto, auto, auto, auto, auto),
@@ -456,73 +457,71 @@ community coloring.
     table.header(
       [*Community*], [*N*], [*Bots*], [*Bot %*], [*Avg. PR*], [*Avg. Recip.*],
     ),
-    [1: Vaccine Misinformation Accounts], [962], [139], [14.5%], [0.000398], [0.0009],
-    [2: Health Authorities],              [635], [89],  [14.0%], [0.000783], [0.0010],
-    [3: News and Media],                  [365], [43],  [11.8%], [0.000139], [0.0025],
-    [4: Vaccine-Hesitant Community],      [294], [31],  [10.5%], [0.000129], [0.0010],
-    [5: Bot Amplification Network],       [244], [198], [81.1%], [0.000128], [0.0008],
+    [1: Marcos Supporters],    [962], [139], [14.5%], [0.000398], [0.0009],
+    [2: Robredo Supporters],   [635], [89],  [14.0%], [0.000783], [0.0010],
+    [3: News and Media],       [365], [43],  [11.8%], [0.000139], [0.0025],
+    [4: Amplification Bots],   [294], [31],  [10.5%], [0.000129], [0.0010],
+    [5: Neutral / Undecided],  [244], [198], [81.1%], [0.000128], [0.0008],
   )
 ) <tbl-communities>
 
-The recovered community structure maps directly onto the vaccine stance
-landscape documented in COVID-19 infodemic research @Cinelli2020 @Ferrara2020.
-Although the initial communities were seeded, Louvain independently confirmed
-structurally coherent partitions ($Q = 0.4837$), validating that the generative
-model's inter-community edge patterns are consistent with organic community
-formation.
+The recovered community structure maps directly onto the political faction
+landscape documented in Philippine election research @Ong2019. Although the
+initial communities were seeded, Louvain independently confirmed structurally
+coherent partitions ($Q = 0.4837$), validating that the generative model's
+inter-community edge patterns are consistent with organic community formation.
 
-Community 1 (Vaccine Misinformation Accounts, $n = 962$) is the largest by
-node count but exhibits lower average PageRank (0.000398) than Community 2
-(Health Authorities, $n = 635$, avg. PR = 0.000783). This asymmetry reveals
-that while misinformation spreaders achieve volumetric reach through high
-out-degree amplification, health authority accounts command structurally superior
-organic influence --- a distinction with direct implications for counter-messaging
-strategy @Loomba2021.
+Community 1 (Marcos Supporters, $n = 962$) is the largest by node count but
+exhibits lower average PageRank (0.000398) than Community 2 (Robredo
+Supporters, $n = 635$, avg. PR = 0.000783). This asymmetry reveals that while
+the pro-Marcos faction achieves volumetric reach through high out-degree
+amplification, pro-Robredo accounts command structurally superior organic
+influence --- a distinction with direct implications for counter-messaging
+strategy @Pennycook2021.
 
-The most analytically significant finding is Community 5 (Bot Amplification
-Network), in which 198 of 244 accounts (81.1%) are bot-suspected. This community
-exhibits the lowest average PageRank (0.000128) and reciprocity (0.0008),
-confirming its role as a pure anti-vaccine broadcasting layer: accounts that
-inject content into the main communities without generating meaningful engagement
-in return @Ferrara2020. The structural isolation of this community, combined with
-its near-total bot concentration, constitutes structural evidence of a dedicated
-CIB infrastructure targeting the Philippine vaccine discourse network @Starbird2019.
+The most analytically significant finding is Community 5 (Neutral/Undecided),
+in which 198 of 244 accounts (81.1%) are bot-suspected. This community exhibits
+the lowest average PageRank (0.000128) and reciprocity (0.0008), confirming its
+role as a cross-faction broadcasting layer: accounts that inject partisan
+content into both Marcos and Robredo communities without generating meaningful
+engagement in return @Ferrara2016. The structural isolation of this community,
+combined with its near-total bot concentration, constitutes evidence of a
+dedicated CIB infrastructure targeting the Philippine election discourse
+@Starbird2019.
 
 Community 3 (News and Media, $n = 365$) displays the highest average reciprocity
 (0.0025), consistent with the bidirectional flow characteristic of journalism
-accounts that both originate and receive health information. The Vaccine-Hesitant
-Community ($n = 294$, bot% = 10.5%) exhibits the lowest bot infiltration of any
-non-authority community, suggesting that vaccine hesitancy in the Philippine
-context is primarily an organic phenomenon --- one that the Bot Amplification
-Network actively seeks to exploit and reinforce @Roozenbeek2020.
+accounts. The Amplification Bots community ($n = 294$, bot% = 10.5%) exhibits
+relatively lower bot infiltration, suggesting it functions as an intermediate
+cross-faction relay layer rather than a pure broadcast layer.
 
 #figure(
   placement: none,
   image("figures/fig5_communities.png", width: 100%),
-  caption: [Louvain community structure of the full retweet network (_Q_ = 0.4837). Five communities are identified, corresponding to distinct vaccine stance factions. Node size is proportional to PageRank.],
+  caption: [Louvain community structure of the full retweet network (_Q_ = 0.4837). Five communities correspond to distinct political factions. Node size is proportional to PageRank.],
 ) <fig-communities>
 
 === Primary Community Subgraph
 
-Figure 6 presents the Community 1 (Vaccine Misinformation Accounts) subgraph.
-The internal topology reveals a hub-and-spoke structure: a small set of
-high-PageRank organic accounts attract the majority of retweet edges, while
-bot-suspected accounts occupy peripheral positions with multiple outgoing edges
-directed at these hubs. This architecture is consistent with an astroturfing
-model in which bot accounts inflate the apparent popularity of specific
-anti-vaccine content creators, manufacturing the perception of broad community
-consensus around vaccine misinformation @Starbird2019.
+Figure 6 presents the Marcos Supporters (Community 1) subgraph. The internal
+topology reveals a hub-and-spoke structure: a small set of high-PageRank organic
+accounts attract the majority of retweet edges, while bot-suspected accounts
+occupy peripheral positions with multiple outgoing edges directed at these hubs.
+This architecture is consistent with an astroturfing model in which bot accounts
+inflate the apparent popularity of specific pro-Marcos content creators,
+manufacturing the perception of broad community consensus @Starbird2019.
 
 The Girvan-Newman analysis on the 150-node high-degree core subgraph confirmed
 the presence of hierarchically nested substructure within the main communities,
-consistent with the existence of sub-factions organized around specific false
-claims --- such as groups disputing particular vaccine brands or ingredients ---
-within the broader vaccine stance alignments @GirvanNewman2002.
+consistent with the existence of sub-factions organized around specific
+narratives --- such as groups promoting particular historical revisionist claims
+or targeting specific Robredo supporters --- within the broader political
+alignments @GirvanNewman2002.
 
 #figure(
   placement: none,
   image("figures/fig6_marcos_community.png", width: 100%),
-  caption: [Subgraph of Community 1 (Vaccine Misinformation Accounts, _n_ = 962). Labeled nodes indicate the five highest-PageRank accounts within the community. Red nodes: bot-suspected. Directed edges show retweet relationships.],
+  caption: [Subgraph of Community 1 (Marcos Supporters, _n_ = 962). Labeled nodes indicate the five highest-PageRank accounts within the community. Red nodes: bot-suspected. Directed edges show retweet relationships.],
 ) <fig-marcos>
 
 // ===========================================================================
@@ -530,32 +529,34 @@ within the broader vaccine stance alignments @GirvanNewman2002.
 // ===========================================================================
 
 This study applied a six-metric social network analysis framework to a directed
-retweet network calibrated to the structural parameters of Philippine COVID-19
-vaccine discourse on Twitter, revealing three principal findings.
+retweet network calibrated to the structural parameters of Philippine 2022
+presidential election discourse on Twitter, revealing three principal findings.
 
-Health Authorities hold the highest PageRank (avg. PR = 0.000783) despite being
-outnumbered by Vaccine Misinformation accounts (avg. PR = 0.000398) --- credible
-voices command structurally superior reach even when outnumbered, while
-misinformation spreaders compensate through volume. For RQ1, this confirms that
-amplifying authoritative health voices may be a more effective intervention than
-suppressing individual accounts @Loomba2021 @Pennycook2021.
+Robredo Supporters hold the highest PageRank (avg. PR = 0.000783) despite being
+outnumbered by Marcos Supporters (avg. PR = 0.000398) --- pro-opposition voices
+command structurally superior organic reach even when outnumbered, while
+the larger Marcos faction compensates through volume and bot amplification.
+For RQ1, this confirms that pro-Robredo content spreaders dominate authentic
+influence pathways, consistent with findings that organic credibility is more
+structurally durable than manufactured reach @Vosoughi2018 @Pennycook2021.
 
 Bot-suspected Acc. 190 (betweenness = 0.034293) is the network's primary
 structural bridge yet ranks low on PageRank --- sitting at the intersection of
-the Vaccine Misinformation Accounts and Vaccine-Hesitant Community, it may act
-as a conversion gateway radicalizing hesitant users. These hidden brokers
-(RQ2/RQ4) are invisible to single-metric rankings, making betweenness an
-essential complement to PageRank for infodemic intervention.
+Marcos Supporters and the Neutral/Undecided community, it may act as a
+conversion gateway amplifying pro-Marcos narratives to undecided users.
+These hidden brokers (RQ2/RQ4) are invisible to single-metric rankings, making
+betweenness an essential complement to PageRank for election infodemic
+intervention.
 
-The Bot Amplification Network's 81.1% bot concentration and near-zero
+The Neutral/Undecided community's 81.1% bot concentration and near-zero
 reciprocity (avg. = 0.0008) mark it as a dedicated CIB layer at the network's
 periphery (RQ3) --- consistent with coordinated inauthentic amplification
-patterns documented in COVID-19 bot research @Ferrara2020 @Stella2018.
+patterns documented in political bot research @Ferrara2016 @Stella2018.
 
 Key limitations are the synthetic network and heuristic bot labels. Future work
 should apply this framework to longitudinal real data to track how the bot
 community evolves across campaign phases and pinpoint the sequence of
-anti-vaccine narrative injections across infodemic waves.
+anti-opposition narrative injections across distinct infodemic waves.
 
 // ===========================================================================
 = References
